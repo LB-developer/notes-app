@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import SideBar from './SideBar'
-import Main from './Editor'
 import { Note } from '../models/notes'
+import Editor from './Editor'
 
 function App() {
   const [notes, setNotes] = useState<Note[]>([])
   const [noteId, setNoteId] = useState<number>(1)
+  const [activeNote, setActiveNote] = useState<Note | boolean>(false)
 
   const handleAddNote = () => {
     const newNote: Note = {
       id: noteId,
-      title: 'testing',
-      body: 'testing body',
+      title: 'Untitled',
+      body: '',
       lastModified: Date.now(),
     }
 
@@ -32,8 +33,10 @@ function App() {
         notes={notes}
         handleAddNote={handleAddNote}
         handleDeleteNote={handleDeleteNote}
+        activeNote={activeNote}
+        setActiveNote={setActiveNote}
       />
-      <Main />
+      <Editor activeNote={activeNote} />
     </div>
   )
 }

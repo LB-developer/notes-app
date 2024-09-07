@@ -1,4 +1,10 @@
-export default function Main() {
+import { Note } from "../models/notes"
+
+interface Props {
+  activeNote: Note | boolean
+}
+
+export default function Editor({activeNote}: Props) {
   return (
     <>
       <div className="note-editor-edit">
