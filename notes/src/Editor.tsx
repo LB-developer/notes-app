@@ -17,35 +17,37 @@ export default function Editor({ activeNote, handleEditNote }: Props) {
 
   if (typeof activeNote !== 'boolean')
     return (
-      <>
+      <div className="note-editor-container">
         <div className="note-editor-edit">
           <input
+            className="title-edit"
             type="text"
             autoFocus
+            placeholder="Enter note title..."
             value={activeNote.title}
             onChange={(e) => handleEditField('title', e.target.value)}
           />
           <textarea
+            className="note-editor-preview"
             value={activeNote.body}
+            placeholder="Write your note here..."
             onChange={(e) => handleEditField('body', e.target.value)}
             id="edit-field"
           ></textarea>
         </div>
-        <div className="note-editor-preview"></div>
-        <h1>{activeNote.title}</h1>
-        <div className="note-preview">{activeNote.body}</div>
-      </>
+
+        <div className="preview-container">
+          <h1 style={{ marginBottom: '1rem' }}>{activeNote.title}</h1>
+          <div className="note-preview">{activeNote.body}</div>
+        </div>
+      </div>
     )
   else
     return (
-      <>
+      <div className="note-editor-container">
         <div className="note-editor-edit">
-          <input type="text" autoFocus />
-          <textarea id="edit-field"></textarea>
+          <h1>Select note to edit</h1>
         </div>
-        <div className="note-editor-preview"></div>
-        <h1>TITLE</h1>
-        <div>note preview</div>
-      </>
+      </div>
     )
 }

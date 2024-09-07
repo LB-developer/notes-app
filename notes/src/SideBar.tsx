@@ -20,37 +20,48 @@ export default function SideBar({
       <div className="sidebar-container">
         <div className="sidebar-header">
           <h1>Notes</h1>
-          <button onClick={handleAddNote}>Add</button>
+          <button className={'add-note-button'} onClick={handleAddNote}>
+            Add
+          </button>
         </div>
-      </div>
-      <div className="sidebar-notes">
-        {notes.length > 0 &&
-          notes.map((note) => (
-            <div
-              key={note.id}
-              onClick={() => setActiveNote(note)}
-              className="sidebar-note"
-            >
+        <div className="sidebar-notes">
+          {notes.length > 0 &&
+            notes.map((note) => (
               <div
-                className={`sidebar-note-title ${
-                  typeof activeNote !== 'boolean' &&
-                  activeNote.id === note.id &&
-                  'active-note'
-                }`}
+                key={note.id}
+                onClick={() => setActiveNote(note)}
+                className="sidebar-note"
               >
-                <strong>{note.title}</strong>
-                <button onClick={() => handleDeleteNote(note.id)}>DEL</button>
-                <p>{note.body}</p>
+                <div
+                  className={`sidebar-note-title ${
+                    typeof activeNote !== 'boolean' &&
+                    activeNote.id === note.id &&
+                    'active-note'
+                  }`}
+                >
+                  <div className="note-title-button">
+                    <strong>{note.title}</strong>
+                    <button
+                      className={'delete-note-button'}
+                      onClick={() => handleDeleteNote(note.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                  <p>{note.body}</p>
 
-                <small className="note-meta-data">
-                  {new Date(note.lastModified).toLocaleDateString('en-AU', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
-                </small>
+                  <small className="note-meta-data">
+                    {`Last modified ${new Date(
+                      note.lastModified
+                    ).toLocaleDateString('en-AU', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}`}
+                  </small>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
       </div>
     </>
   )
