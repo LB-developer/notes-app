@@ -27,6 +27,19 @@ function App() {
     setNotes([...notes])
   }
 
+  const handleEditNote = (updatedNote: Note) => {
+    if (typeof activeNote !== 'boolean') {
+      const delIndex: number = notes.findIndex(
+        (note) => note.id === updatedNote.id
+      )
+      const current = [...notes]
+      current[delIndex] = updatedNote
+
+      setNotes(current)
+      setActiveNote(updatedNote)
+    }
+  }
+
   return (
     <div className="App">
       <SideBar
@@ -36,7 +49,7 @@ function App() {
         activeNote={activeNote}
         setActiveNote={setActiveNote}
       />
-      <Editor activeNote={activeNote} />
+      <Editor activeNote={activeNote} handleEditNote={handleEditNote} />
     </div>
   )
 }

@@ -26,8 +26,18 @@ export default function SideBar({
       <div className="sidebar-notes">
         {notes.length > 0 &&
           notes.map((note) => (
-            <div onClick={() => setActiveNote(note)} className="sidebar-note">
-              <div className={`sidebar-note-title ${typeof activeNote !== 'boolean' && activeNote.id === note.id && "active-note"}`}>
+            <div
+              key={note.id}
+              onClick={() => setActiveNote(note)}
+              className="sidebar-note"
+            >
+              <div
+                className={`sidebar-note-title ${
+                  typeof activeNote !== 'boolean' &&
+                  activeNote.id === note.id &&
+                  'active-note'
+                }`}
+              >
                 <strong>{note.title}</strong>
                 <button onClick={() => handleDeleteNote(note.id)}>DEL</button>
                 <p>{note.body}</p>
